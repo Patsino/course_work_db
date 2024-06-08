@@ -1,0 +1,40 @@
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\DataTransfer.exe
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\DataTransfer.deps.json
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\DataTransfer.runtimeconfig.json
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\DataTransfer.dll
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\DataTransfer.pdb
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\Dapper.dll
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\bin\Debug\net8.0\Npgsql.dll
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTransfer.csproj.AssemblyReference.cache
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTransfer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTransfer.AssemblyInfoInputs.cache
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTransfer.AssemblyInfo.cs
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTransfer.csproj.CoreCompileInputs.cache
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTran.E6AA39CB.Up2Date
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTransfer.dll
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\refint\DataTransfer.dll
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTransfer.pdb
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\DataTransfer.genruntimeconfig.cache
+C:\Users\Nikita\Desktop\блядский курсач\DataTransfer\DataTransfer\obj\Debug\net8.0\ref\DataTransfer.dll
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\DataTransfer.exe
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\DataTransfer.deps.json
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\DataTransfer.runtimeconfig.json
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\DataTransfer.dll
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\DataTransfer.pdb
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\Dapper.dll
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\bin\Debug\net8.0\Npgsql.dll
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTransfer.csproj.AssemblyReference.cache
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTransfer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTransfer.AssemblyInfoInputs.cache
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTransfer.AssemblyInfo.cs
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTransfer.csproj.CoreCompileInputs.cache
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTran.E6AA39CB.Up2Date
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTransfer.dll
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\refint\DataTransfer.dll
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTransfer.pdb
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\DataTransfer.genruntimeconfig.cache
+C:\Users\Nikita\Desktop\coursee\DataTransfer(ETL)\DataTransfer\obj\Debug\net8.0\ref\DataTransfer.dll

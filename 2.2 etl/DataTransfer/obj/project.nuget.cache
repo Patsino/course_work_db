@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "nSohQlBojn8Y7bTQS05Ah0AC/PLUDdf6LUOGLC8PU/RhyzmuPSdlPQnAfh872Q7j2iQxdlZeQS2NsvHg4SDYcw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Nikita\\Desktop\\coursee\\DataTransfer(ETL)\\DataTransfer\\DataTransfer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Nikita\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Nikita\\.nuget\\packages\\npgsql\\8.0.3\\npgsql.8.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
