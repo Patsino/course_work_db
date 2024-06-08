@@ -1,0 +1,83 @@
+--dim
+CREATE TABLE Time_Dimension (
+    time_id SERIAL PRIMARY KEY,
+    a_date DATE NOT NULL,
+    year INT NOT NULL,
+    month INT NOT NULL,
+    quarter INT NOT NULL,
+    day_of_week INT NOT NULL
+);
+select * from Time_Dimension
+
+select * from Time_Dimension
+
+CREATE TABLE Product_Dimension (
+    product_id SERIAL PRIMARY KEY,
+    product_name VARCHAR(255) NOT NULL,
+    category_id INT NOT NULL,
+    manufacturer_id INT NOT NULL,
+    price NUMERIC(10, 2) NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE Location_Dimension (
+    location_id SERIAL PRIMARY KEY,
+    city VARCHAR(255) NOT NULL,
+    country VARCHAR(255) NOT NULL
+);
+
+select * from Product_Dimension
+delete from Product_Dimension where product_id = 0
+
+CREATE TABLE Dim_User (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL
+);
+
+--fact
+CREATE TABLE Sales_Fact (
+    sales_id SERIAL PRIMARY KEY,
+    time_id INT REFERENCES Time_Dimension(time_id),
+    product_id INT REFERENCES Product_Dimension(product_id),
+    location_id INT REFERENCES Location_Dimension(location_id),
+    quantity_sold INT NOT NULL,
+    amount_sold NUMERIC(10, 2) NOT NULL,
+    discount NUMERIC(5, 2)
+);
+select * from Sales_fact
+
+CREATE TABLE Inventory_Fact (
+    inventory_id SERIAL PRIMARY KEY,
+    time_id INT REFERENCES Time_Dimension(time_id),
+    product_id INT REFERENCES Product_Dimension(product_id),
+    location_id INT REFERENCES Location_Dimension(location_id),
+    quantity_in_stock INT NOT NULL,
+    quantity_sold INT NOT NULL
+);
+
+select * from Inventory_Fact
+delete from Inventory_Fact
+
+
+CREATE INDEX idx_time_id ON Sales_Fact(time_id);
+CREATE INDEX idx_product_id ON Sales_Fact(product_id);
+CREATE INDEX idx_location_id ON Sales_Fact(location_id);
+
+CREATE INDEX idx_time_id_inventory ON Inventory_Fact(time_id);
+CREATE INDEX idx_product_id_inventory ON Inventory_Fact(product_id);
+CREATE INDEX idx_location_id_inventory ON Inventory_Fact(location_id);
+
+--Sales by Product Category:
+
+SELECT pd.category_id, SUM(sf.amount_sold) AS total_sales
+FROM Sales_Fact sf
+JOIN Product_Dimension pd ON sf.product_id = pd.product_id
+GROUP BY pd.category_id;
+
+--Inventory Levels by Product:
+SELECT pd.product_id, pd.product_name, SUM(IF.quantity_in_stock) AS total_inventory
+FROM Inventory_Fact IF
+JOIN Product_Dimension pd ON IF.product_id = pd.product_id
+GROUP BY pd.product_id, pd.product_name;
+

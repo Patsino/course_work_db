@@ -1,0 +1,182 @@
+CREATE TABLE Users (
+    user_id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    role VARCHAR(5) CHECK (role IN ('user', 'admin')) NOT NULL
+);
+
+CREATE TABLE Books (
+    book_id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    isbn VARCHAR(20) NOT NULL UNIQUE,
+    price NUMERIC(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    description TEXT
+);
+
+CREATE TABLE Categories (
+    category_id SERIAL PRIMARY KEY,
+    category_name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE Authors (
+    author_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Orders (
+    order_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id),
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(9) CHECK (status IN ('pending', 'shipped', 'delivered', 'canceled')) NOT NULL,
+    total_amount NUMERIC(10, 2)
+);
+select * from Orders
+
+CREATE TABLE Order_Items (
+    order_item_id SERIAL PRIMARY KEY,
+    order_id INT REFERENCES Orders(order_id),
+    book_id INT REFERENCES Books(book_id),
+    quantity INT NOT NULL,
+    price NUMERIC(10, 2) NOT NULL
+);
+
+CREATE TABLE Shopping_Cart (
+    cart_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Cart_Items (
+    cart_item_id SERIAL PRIMARY KEY,
+    cart_id INT REFERENCES Shopping_Cart(cart_id),
+    book_id INT REFERENCES Books(book_id),
+    quantity INT NOT NULL
+);
+
+CREATE TABLE Reviews (
+    review_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES Users(user_id),
+    book_id INT REFERENCES Books(book_id),
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT,
+    review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_users_username ON Users(username);
+CREATE INDEX idx_books_title ON Books(title);
+CREATE INDEX idx_orders_user_id ON Orders(user_id);
+CREATE INDEX idx_order_items_order_id ON Order_Items(order_id);
+CREATE INDEX idx_cart_items_cart_id ON Cart_Items(cart_id);
+CREATE INDEX idx_reviews_user_id ON Reviews(user_id);
+CREATE INDEX idx_reviews_book_id ON Reviews(book_id);
+
+
+
+--Product Search
+SELECT * FROM Books WHERE title ILIKE '%search_term%' OR description ILIKE '%search_term%';
+
+--Product View
+SELECT * FROM Books WHERE book_id = $1;
+
+--Basket
+SELECT b.title, b.price, ci.quantity 
+FROM Cart_Items ci 
+JOIN Books b ON ci.book_id = b.book_id 
+WHERE ci.cart_id = $1;
+
+--Order Details
+SELECT o.*, oi.*, b.title 
+FROM Orders o 
+JOIN Order_Items oi ON o.order_id = oi.order_id 
+JOIN Books b ON oi.book_id = b.book_id 
+WHERE o.order_id = $1;
+
+--User Account
+SELECT * FROM Users WHERE user_id = $1;
+
+SELECT * FROM Orders WHERE user_id = $1;
+
+
+--Functions and Procedures for Main Actions
+--add book to cart
+CREATE OR REPLACE FUNCTION AddBookToCart(p_user_id INT, p_book_id INT, p_quantity INT)
+RETURNS VOID AS $$
+DECLARE
+    cart_id INT;
+BEGIN
+    SELECT cart_id INTO cart_id FROM Shopping_Cart WHERE user_id = p_user_id;
+    IF cart_id IS NULL THEN
+        INSERT INTO Shopping_Cart (user_id) VALUES (p_user_id) RETURNING cart_id INTO cart_id;
+    END IF;
+    INSERT INTO Cart_Items (cart_id, book_id, quantity) VALUES (cart_id, p_book_id, p_quantity);
+END;
+$$ LANGUAGE plpgsql;
+
+
+--Place Order
+
+CREATE OR REPLACE FUNCTION PlaceOrder(p_user_id INT)
+RETURNS VOID AS $$
+DECLARE
+    cart_id INT;
+    total NUMERIC(10, 2);
+    cur CURSOR FOR SELECT book_id, quantity, price FROM Cart_Items ci JOIN Books b ON ci.book_id = b.book_id WHERE ci.cart_id = cart_id;
+    rec RECORD;
+BEGIN
+    SELECT INTO cart_id cart_id FROM Shopping_Cart WHERE user_id = p_user_id;
+    IF cart_id IS NULL THEN
+        RAISE EXCEPTION 'No cart found for user';
+    END IF;
+
+    SELECT SUM(b.price * ci.quantity) INTO total
+    FROM Cart_Items ci 
+    JOIN Books b ON ci.book_id = b.book_id 
+    WHERE ci.cart_id = cart_id;
+
+    INSERT INTO Orders (user_id, status, total_amount) VALUES (p_user_id, 'pending', total) RETURNING order_id INTO rec;
+
+    FOR rec IN cur LOOP
+        INSERT INTO Order_Items (order_id, book_id, quantity, price) VALUES (rec.order_id, rec.book_id, rec.quantity, rec.price);
+    END LOOP;
+
+    DELETE FROM Cart_Items WHERE cart_id = cart_id;
+    DELETE FROM Shopping_Cart WHERE cart_id = cart_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+--remove item from cart
+CREATE OR REPLACE FUNCTION DeleteItemFromCart(p_cart_item_id INT)
+RETURNS VOID AS $$
+BEGIN
+    DELETE FROM Cart_Items WHERE cart_item_id = p_cart_item_id;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE ROLE admin;
+CREATE ROLE Def_User;
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON Users TO admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Books TO admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Categories TO admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Authors TO admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Orders TO admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Order_Items TO admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Shopping_Cart TO admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Cart_Items TO admin;
+GRANT SELECT, INSERT, UPDATE, DELETE ON Reviews TO admin;
+
+GRANT SELECT, INSERT ON Users TO Def_User;
+GRANT SELECT ON Books TO Def_User;
+GRANT SELECT ON Categories TO Def_User;
+GRANT SELECT ON Authors TO Def_User;
+GRANT SELECT, INSERT ON Orders TO Def_User;
+GRANT SELECT, INSERT ON Order_Items TO Def_User;
+GRANT SELECT, INSERT ON Shopping_Cart TO Def_User;
+GRANT SELECT, INSERT, DELETE ON Cart_Items TO Def_User;
+GRANT SELECT, INSERT, DELETE ON Reviews TO Def_User;
+
+select * from authors
+
